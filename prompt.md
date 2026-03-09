@@ -63,4 +63,41 @@ Before coding:
 - Output schema rõ ràng → code có thể plug vào pipeline khác ngay
 - Yêu cầu plan trước → Human review trước khi AI code
 - Edge cases được raise sớm → ít bug hơn
+
+---
+
+## PROMPT 2 — Implement (sau khi review PLAN.md)
+
 ```
+Plan looks good. Now implement Step 1 and Step 2 only:
+- Step 1: CLI parsing + input validation
+- Step 2: Image preprocessing (shared for both backends)
+
+Do not implement inference yet.
+After each step, show me the code and stop.
+```
+
+---
+
+## PROMPT 3 — Tiếp tục từng bước
+
+```
+Good. Now implement Step 3 (PyTorch backend) only.
+Keep the code compatible with the preprocessing from Step 2.
+Stop after Step 3, do not implement ONNX yet.
+```
+
+---
+
+## PROMPT 4 — Hoàn thiện
+
+```
+Now implement Step 4 (ONNX backend) and Step 5 (benchmark loop).
+Reuse the preprocessing from Step 2.
+Reminder: warm up 5 runs before measuring.
+```
+
+---
+
+> Workflow: Plan First → Review → Step-by-step → Commit mỗi bước
+> "Not reviewing AI code is the same as merging a PR you didn't read"
